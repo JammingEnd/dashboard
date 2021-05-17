@@ -11,7 +11,7 @@
 
 <body>
     <div class="text-center align-middle" style="height: 50%;">
-        <form action="./server/index.php" method="POST">
+        <form action="../server/server.php" method="POST">
             <fieldset>
                 <legend>Kenteken</legend>
             </fieldset>

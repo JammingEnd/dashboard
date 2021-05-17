@@ -1,3 +1,5 @@
+<?php include("../server/navs.php") ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +27,26 @@ padding: 3px;
 
 <div class="panel">
 <!-- links to the other screens -->
-<!--
+<script type="text/javascript">
+    var een_lijstJS = <?php echo json_encode($navs) ?>;
+
+    console.log(een_lijstJS);
+
+
+    
+
+</script>
+
 <a href="the php file+location"> this screen</a>
 <a href="the php file+location"> other screen</a>
--->
+
 <p> go to this place </p>
 <p> go to the other place </p>
+
 </div>
 
 
 <?php
-class NavPanel {
 
 ?>
 
