@@ -8,7 +8,7 @@
     $result = CurlHelper::perform_http_request($action, $url, $parameters);
     echo "<br><br>RESULT => ";
 
-    $actualResult = json_decode($result);
+    $actualResult = json_encode($result);
 
-    echo print_r($result)
+    echo $actualResult;
 ?>
