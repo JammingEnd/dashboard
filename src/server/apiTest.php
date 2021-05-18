@@ -5,8 +5,6 @@
     echo "Trying to reach ...";
     echo $url;
     $parameters = array("param" => "value");
-    echo "<br>";
-    echo "1";
     $result = CurlHelper::perform_http_request($action, $url, $parameters);
     echo "<br><br>RESULT => ";
 
