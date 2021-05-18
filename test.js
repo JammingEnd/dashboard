@@ -1,1 +1,0 @@
-const test = new Document().getElementById("")

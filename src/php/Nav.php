@@ -25,23 +25,15 @@ padding: 3px;
 </head>
 <body>
 
-<div class="panel">
+<div class="panel" id="panel">
 <!-- links to the other screens -->
 <script type="text/javascript">
-    var een_lijstJS = <?php echo json_encode($navs) ?>;
-
-    console.log(een_lijstJS);
-
-
-    
 
 </script>
 
-<a href="the php file+location"> this screen</a>
-<a href="the php file+location"> other screen</a>
 
-<p> go to this place </p>
-<p> go to the other place </p>
+<a id="nav-panel" href="./index.php">home</a>
+<!-- <a href="the php file+location"> other screen</a>  -->
 
 </div>
 
