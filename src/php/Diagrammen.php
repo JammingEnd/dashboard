@@ -104,7 +104,7 @@ var labelDiagram2 = <?php echo json_encode($labelDriagram2)?>;
    //soort grafiek
     const config2 = {
         type: 'line',
-        data,
+        data: data2,
         options: {}
     };
 
