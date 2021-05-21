@@ -4,6 +4,9 @@
 $woonplaatsen = array('Sneek', 'Bolsward', 'Sint Nicolaasga', 'Overig');
 $aantallen = array(50, 1257, 3345, 1567, 897, 34, 12);
 $aantallen2 = array(30, 1567, 3045, 1787, 497, 56, 45);
+$aantallenDiagram2 = array(0, 10, 5, 2, 20, 30, 45);
+$labelDriagram2 = array( 'January','February','March','April','May','June',);
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -31,6 +34,8 @@ $aantallen2 = array(30, 1567, 3045, 1787, 497, 56, 45);
  var een_lijstJS = <?php echo json_encode($aantallen) ?>;
   var een_lijstJS2 = <?php echo json_encode($aantallen2) ?>;
 
+//labels veranderen naar de opgevraagde data
+
    const data = {
    labels: [
   '2cc',
@@ -57,7 +62,7 @@ datasets: [{
 };
 
 
-  // 2. De config, waarin je aangeeft wat voor grafiek het wordt
+
  const config = {
 type: 'radar',
 data: data,
@@ -69,7 +74,7 @@ options: {
   }
 },
 };
-window.addEventListener('load', function() { //deze code mag pas uitgevoerd worden als alle HTML geladen is!
+window.addEventListener('load', function() { 
       var myChart = new Chart(
           document.getElementById('test'),
           config
@@ -82,46 +87,41 @@ window.addEventListener('load', function() { //deze code mag pas uitgevoerd word
         <canvas id="Dia2"></canvas>
     </div>
 
+<script type="text/javascript">
+var dataDiagram2 = <?php echo json_encode($aantallenDiagram2) ?>;  
+var labelDiagram2 = <?php echo json_encode($labelDriagram2)    ?>
 
-    <script type="text/javascript">
-    // 3. Eerst het stukje met de tekst onder de grafiek: de labels.
-    // const, let en var gebruik je om een variabele aan te maken
-    const labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-    ];
+//labels veranderen naar de opgevraagde data
 
-    // 4. Nu moet je aangeven welke data in de grafiek moet, en welke kleuren. 
+
+    const labels = labelDiagram2;
+
+    //data
     const data2 = {
         labels: labels,
         datasets: [{
             label: 'tweede diagram',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
+            data: dataDiagram2,
         }]
     };
 
-    // 5. Dan de config: hierin geef je aan wat voor soort grafiek je wil hebben 
-    // (nu type:line)
+   //soort grafiek
     const config2 = {
         type: 'line',
         data,
         options: {}
     };
 
-    // 6. Laatste stap: laat de chart tekenen. Zie je dat je hier die ID 
-    // van het canvas "myChart" weer gebruikt?
-    window.addEventListener('load', function() { //deze code mag pas uitgevoerd worden als alle HTML geladen is!
+    
+    //toevoegen
+    window.addEventListener('load', function() { 
         var myChart = new Chart(
             document.getElementById('Dia2'),
             config2
         );
-    }); // sluit de eerste function
+    }); 
     </script>
     </div>
 </body>
