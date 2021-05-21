@@ -32,9 +32,9 @@ $labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else');
 
 <script type="text/javascript">
  
- var een_lijstJS = <?php echo json_encode($aantallen) ?>;
-  var een_lijstJS2 = <?php echo json_encode($aantallen2) ?>;
-   var labelDia1 = <?php echo json_encode($labelDriagram1) ?>;
+var een_lijstJS = <?php echo json_encode($aantallen) ?>;
+var een_lijstJS2 = <?php echo json_encode($aantallen2) ?>;
+var labelDia1 = <?php echo json_encode($labelDriagram1) ?>;
 
 //labels veranderen naar de opgevraagde data
 
@@ -83,16 +83,16 @@ window.addEventListener('load', function() {
 
 <script type="text/javascript">
 var dataDiagram2 = <?php echo json_encode($aantallenDiagram2) ?>;  
-var labelDiagram2 = <?php echo json_encode($labelDriagram2)    ?>
+var labelDiagram2 = <?php echo json_encode($labelDriagram2)?>;
 
 //labels veranderen naar de opgevraagde data
 
 
-    const labels = labelDiagram2;
+    const labels2 = labelDiagram2;
 
     //data
     const data2 = {
-        labels: labels,
+        labels: labels2,
         datasets: [{
             label: 'tweede diagram',
             backgroundColor: 'rgb(255, 99, 132)',
