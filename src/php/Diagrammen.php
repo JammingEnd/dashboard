@@ -6,6 +6,7 @@ $aantallen = array(50, 1257, 3345, 1567, 897, 34, 12);
 $aantallen2 = array(30, 1567, 3045, 1787, 497, 56, 45);
 $aantallenDiagram2 = array(0, 10, 5, 2, 20, 30, 45);
 $labelDriagram2 = array( 'January','February','March','April','May','June',);
+$labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else');    
 
 ?>
 <head>
@@ -33,19 +34,12 @@ $labelDriagram2 = array( 'January','February','March','April','May','June',);
  
  var een_lijstJS = <?php echo json_encode($aantallen) ?>;
   var een_lijstJS2 = <?php echo json_encode($aantallen2) ?>;
+   var labelDia1 = <?php echo json_encode($labelDriagram1) ?>;
 
 //labels veranderen naar de opgevraagde data
 
    const data = {
-   labels: [
-  '2cc',
-  '4cc',
-  '6cc',
-  '8cc',
-  'electric',
-  'hydrogen',
-  'else'
-],
+   labels: labelDia1,
 
 datasets: [{
   label: 'Mercedes',
