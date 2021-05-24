@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="text-center align-middle" style="height: 50%;">
+    <div class="text-center align-middle" style="padding-top: 20%;">
         <form action="./kentekeninfo.php" method="POST">
             <fieldset>
                 <legend>Kenteken</legend>

@@ -33,8 +33,8 @@
 
 	$voertuig = $voertuigen[0];
 
-	echo 'Merk  en Model  = ' . $voertuig->getMerk() . ' ' . $voertuig->getHandelsBenaming() . '</p>';
-	echo '<p>Kenteken = ' . $voertuig->getKenteken() . '<br />';
+	// echo 'Merk  en Model  = ' . $voertuig->getMerk() . ' ' . $voertuig->getHandelsBenaming() . '</p>';
+	// echo '<p>Kenteken = ' . $voertuig->getKenteken() . '<br />';
 		
 ?>
 
@@ -44,31 +44,68 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/bootstrap.css">
 	<title>Kenteken - <?php echo $voertuig->getKenteken() ?></title>
 </head>
 <body>
+	<div class="row">
+		
+	</div>
+	<div class="row center-div">
+		<div class="col-lg-12 text-center">
+			<h2>Kenteken: <?php echo $voertuig->getKenteken() ?></h2>
+		</div>
+		<div class="col-lg-12">
+			<div class="bs-component text-center" style="padding: 25px 0 0 25%;">
+				<!-- <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+					<a href="#Kenteken" class="card-body">
+						<h4 class="card-title">Model: <?php echo $voertuig->getHandelsBenaming() ?> </h4>
+					</a>
+				</div> -->
 
-	<div class="container">
-		<ul>
-			<li id="kenteken"><a href="">Kenteken</a>
-				<?php echo '<p>Kenteken = ' . $voertuig->getKenteken() . '<br />'; ?></li>
-			<li id="voertuigsoort"><a href="">Voertuigsoort</a>
-				<?php echo '<p>voertuigsoort = ' . $voertuig->getVoertuigSoort() . '<br />'; ?></li>
-			<li id="Merk"><a href="">Merk</a>
-				<?php echo '<p>merk = ' . $voertuig->getMerk() . '<br />'; ?></li>
-			<li id="handelsbenaming"><a href="">Handelsbenaming</a>
-				<?php echo '<p>Handelsbenaming = ' . $voertuig->getHandelsBenaming() . '<br />'; ?></li>
-			<li id="inrichting"><a href="">Inrichting</a>
-				<?php echo '<p>inrichting = ' . $voertuig->getInrichting() . '<br />'; ?></li>
-			<li id="cilinders"><a href="">Aantal cilinders</a>
-				<?php echo '<p>Aantal cilinders = ' . $voertuig->getAantalCilinders() . '<br />'; ?></li>
-			<li id="variant"><a href="">Variant</a>
-				<?php echo '<p>Variant = ' . $voertuig->getVariant() . '<br />'; ?></li>
-			<li id="kleur"><a href="">Eerste kleur</a>
-				<?php echo '<p>Eerste kleur = ' . $voertuig->getEersteKleur() . '<br />'; ?></li>
-				<li id="datum"><a href="">Datum eerste toelating</a>
-			<?php echo '<p>Datum eerste toelating = ' . $voertuig->getEersteToeLating(). '<br />'; ?></li>
-		</ul>
+				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+					<a href="#merk" class="card-body" style="text-decoration:none;">
+						<h4 class="card-title">Merk: <?php echo $voertuig->getMerk() ?></h4>
+					</a>
+				</div>
+
+				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+					<a href="#model" class="card-body" style="text-decoration:none;">
+						<h4 class="card-title">Model: <?php echo $voertuig->getHandelsBenaming() ?> </h4>
+					</a>
+				</div>
+
+				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+					<a href="#inrichting" class="card-body" style="text-decoration:none;">
+						<h4 class="card-title">Inrichting: <?php echo $voertuig->getInrichting() ?> </h4>
+					</a>
+				</div>
+
+				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+					<a href="#cilinders" class="card-body" style="text-decoration:none;">
+						<h4 class="card-title">Aantal cilinders: <?php echo $voertuig->getAantalCilinders() ?> </h4>
+					</a>
+				</div>
+
+				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+					<a href="#variant" class="card-body" style="text-decoration:none;">
+						<h4 class="card-title">Variant: <?php echo $voertuig->getVariant() ?> </h4>
+					</a>
+				</div>
+
+				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+					<a href="#eersteKleur" class="card-body" style="text-decoration:none;">
+						<h4 class="card-title">Eerste kleur: <?php echo $voertuig->getEersteKleur() ?> </h4>
+					</a>
+				</div>
+
+				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+					<a href="#eersteToeLating" class="card-body" style="text-decoration:none;">
+						<h4 class="card-title">Eerste toelating: <?php echo date("d-m-Y", $voertuig->getEersteToeLating()) ?> </h4>
+					</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
