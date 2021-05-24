@@ -4,8 +4,8 @@ class Voertuigen {
 
     public static $voertuigen = [];
 
-    public static function addVoertuig($apiReponse) {
-        if (gettype($apiReponse) == "array") return self::addVoertuigen($apiReponse);
+    public static function addVoertuig($apiReponse, $cache = false) {
+        if (gettype($apiReponse) == "array") return self::addVoertuigen($apiReponse, $cache);
         
         $newVoertuig = new Voertuig(
             $apiReponse->kenteken, 
@@ -17,15 +17,20 @@ class Voertuigen {
             $apiReponse->variant, 
             $apiReponse->eerste_kleur);
 
-
-        array_push(self::$voertuigen, $newVoertuig);
+        if ($cache) {
+            array_push(self::$voertuigen, $newVoertuig);
+        }
+        return $newVoertuig;
     }
 
-    public static function addVoertuigen($apiReponse) {
-        if (gettype($apiReponse) != "array") return self::addVoertuig($apiReponse);
+    public static function addVoertuigen($apiReponse, $cache = false) {
+        if (gettype($apiReponse) != "array") return self::addVoertuig($apiReponse, $cache);
+        $dataArray = [];
         foreach ($apiReponse as $res) {
-            self::addVoertuig($res);
+            array_push($dataArray, self::addVoertuig($res));
         }
+
+        return $dataArray;
     }
 
 }
