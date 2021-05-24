@@ -11,12 +11,13 @@
 
 <body>
     <div class="text-center align-middle" style="height: 50%;">
-        <form action="../server/server.php" method="POST">
+        <form action="./kentekeninfo.php" method="POST">
             <fieldset>
                 <legend>Kenteken</legend>
             </fieldset>
             <div class="form-group">
-            <!-- TODO make everything uppercase -->
+            <!-- TODO make everything uppercase
+                    AND ERROR MESSAGES! -->
                 <input type="text" placeholder="1ABC23" name="kenteken" class="form-label mt-4">
             </div>
             <button type="submit" name="submit" class="btn btn-lg btn-primary">Search</button>

@@ -15,7 +15,8 @@ class Voertuigen {
             $apiReponse->inrichting, 
             $apiReponse->aantal_cilinders, 
             $apiReponse->variant, 
-            $apiReponse->eerste_kleur);
+            $apiReponse->eerste_kleur,
+            $apiReponse->datum_eerste_toelating);
 
         if ($cache) {
             array_push(self::$voertuigen, $newVoertuig);
@@ -44,9 +45,10 @@ class Voertuig {
     private $_aantalCilinders;
     private $_variant;
     private $_eersteKleur;
+    private $_eersteToeLating;
     private $_lastUpdated;
 
-    public function __construct($kenteken, $voertuigsoort, $merk, $handelsbenaming, $inrichting, $aantalCilinders, $variant, $eersteKleur) {
+    public function __construct($kenteken, $voertuigsoort, $merk, $handelsbenaming, $inrichting, $aantalCilinders, $variant, $eersteKleur, $eersteToeLating) {
         $this->_kenteken = $kenteken;
         $this->_voertuigsoort = $voertuigsoort;
         $this->_merk = $merk;
@@ -55,6 +57,7 @@ class Voertuig {
         $this->_aantalCilinders = $aantalCilinders;
         $this->_variant = $variant;
         $this->_eersteKleur = $eersteKleur;
+        $this->_eersteToeLating = $eersteToeLating;
         $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
         return $this;
     }
@@ -65,7 +68,7 @@ class Voertuig {
 
     public function setKenteken($kenteken) {
         $this->_kenteken = $kenteken;
-        $this->$_lastUpdated = $_SERVER['REQUEST_TIME'];
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
     }
 
     public function getVoertuigSoort() {
@@ -74,7 +77,7 @@ class Voertuig {
 
     public function setVoertuigSoort($voertuigsoort) {
         $this->_voertuigsoort = $voertuigsoort;
-        $this->$_lastUpdated = $_SERVER['REQUEST_TIME'];
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
     }
 
     public function getMerk() {
@@ -83,7 +86,7 @@ class Voertuig {
 
     public function setMerk($merk) {
         $this->_merk = $merk;
-        $this->$_lastUpdated = $_SERVER['REQUEST_TIME'];
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
     }
 
     public function getHandelsBenaming() {
@@ -92,7 +95,7 @@ class Voertuig {
 
     public function setHandelsBenaming($handelsbenaming) {
         $this->_handelsbenaming = $handelsbenaming;
-        $this->$_lastUpdated = $_SERVER['REQUEST_TIME'];
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
     }
 
     public function getInrichting() {
@@ -101,7 +104,7 @@ class Voertuig {
 
     public function setInrichting($inrichting) {
         $this->_inrichting = $inrichting;
-        $this->$_lastUpdated = $_SERVER['REQUEST_TIME'];
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
     }
 
     public function getAantalCilinders() {
@@ -110,7 +113,7 @@ class Voertuig {
 
     public function setAantalCilinders($aantalCilinders) {
         $this->_aantalCilinders = $aantalCilinders;
-        $this->$_lastUpdated = $_SERVER['REQUEST_TIME'];
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
     }
 
     public function getVariant() {
@@ -119,7 +122,7 @@ class Voertuig {
 
     public function setVariant($variant) {
         $this->_variant = $variant;
-        $this->$_lastUpdated = $_SERVER['REQUEST_TIME'];
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
     }
 
     public function getEersteKleur() {
@@ -128,7 +131,16 @@ class Voertuig {
 
     public function setEersteKleur($eersteKleur) {
         $this->_eersteKleur = $eersteKleur;
-        $this->$_lastUpdated = $_SERVER['REQUEST_TIME'];
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
+    }
+
+    public function getEersteToeLating() {
+        return $this->_eersteToeLating;
+    }
+
+    public function setEersteToeLating($eersteToeLating) {
+        $this->_eersteToeLating = $eersteToeLating;
+        $this->_lastUpdated = $_SERVER['REQUEST_TIME'];
     }
 }
 
