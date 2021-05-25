@@ -1,17 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$woonplaatsen = array('Sneek', 'Bolsward', 'Sint Nicolaasga', 'Overig');
-$aantallen = array(50, 1257, 3345, 1567, 897, 34, 12);
-$aantallen2 = array(30, 1567, 3045, 1787, 497, 56, 45);
-$aantallenDiagram2 = array(0, 10, 5, 2, 20, 30, 45);
-$labelDriagram2 = array( 'January','February','March','April','May','June',);
-$labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else'); 
+  include_once("../server/curl_helper.php");
+	include_once("../server/types/voertuigen.php");
 
-$labelNaamDia1 = "";
-$labelnaamDia2 = "";
+  if (count($_GET) <= 0 || !array_key_exists("kenteken", $_GET) || !array_key_exists("key", $_GET)) {
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'index.php';
+    // header("Location: http://$host$uri/$extra");
+    exit; // ???
+  }
+
+  $kenteken = $_GET["kenteken"];
+
+	$url = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
+
+	$results = CurlHelper::getFileContents($url);
+
+	$voertuigen = Voertuigen::addVoertuig(json_decode($results), true);
+
+	if (count($voertuigen) <= 0) {
+    echo "2";
+		$host  = $_SERVER['HTTP_HOST'];
+		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+		$extra = 'index.php';
+		// header("Location: http://$host$uri/$extra");
+		exit;
+	}
+
+  if (!$voertuigen) {
+    echo "3";
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'index.php';
+    // header("Location: http://$host$uri/$extra");
+    exit;
+  }
+
+  // echo $kenteken;
+
+  $mainVoertuig = array_search($kenteken, Voertuigen::$voertuigenCache, true);
 
 
+
+  if (!$mainVoertuig && count($voertuigen) > 1) {
+    $url = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=' . $kenteken;
+
+	  $results = CurlHelper::getFileContents($url);
+    Voertuigen::addVoertuig(json_decode($results), true);
+    $voertuigen = Voertuigen::$voertuigenCache;
+  }
+
+  $lableName = $_GET["key"];
+
+  $aantallen = array(50, 1257, 3345, 1567, 897, 34, 12);
+  $labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else');    
+
+
+  $aantallen2 = array(30, 1567, 3045, 1787, 497, 56, 45); //hexagon
+  $aantallenDiagram2 = array(0, 10, 5, 2, 20, 30, 45);
+  $labelDriagram2 = array( 'January','February','March','April','May','June',);
 
 ?>
 <head>
@@ -40,15 +89,14 @@ $labelnaamDia2 = "";
 var een_lijstJS = <?php echo json_encode($aantallen) ?>;
 var een_lijstJS2 = <?php echo json_encode($aantallen2) ?>;
 var labelDia1 = <?php echo json_encode($labelDriagram1) ?>;
-var labeNaam1 = <?php echo json_encode($labelnaamDia1)?>;
-
+var labelName = <?php echo json_encode($lableName) ?>;
 //labels veranderen naar de opgevraagde data
 
    const data = {
    labels: labelDia1,
 
 datasets: [{
-  label: labelNaam1,
+  label: labelName,
   data: een_lijstJS,
   fill: true,
   backgroundColor: 'rgba(255, 99, 132, 0.2)',

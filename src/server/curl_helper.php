@@ -27,9 +27,8 @@ class CurlHelper {
         }
     
         // Optional Authentication:
-        //curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        //curl_setopt($curl, CURLOPT_USERPWD, "username:password");
-    
+        // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD, "X-App-Token:ZHyla6oL2CtRsybgVkYK37Zsd");
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     
@@ -40,12 +39,19 @@ class CurlHelper {
         return $result;
     }
 
-    public static function getFileContents($url, $data = false) {
-        if ($data) {
-            $url = sprintf("%s?%s", $url, http_build_query($data));
-        }
+    public static function getFileContents($url, ) {
+        $url = $url . "?%24limit=5000&%24%24app_token=ZHyla6oL2CtRsybgVkYK37Zsd";
 
-        $result = file_get_contents($url);
+        $opts = array (
+            'http' => array (
+                'method' => 'GET',
+                'header'=> "X-App-Token: ZHyla6oL2CtRsybgVkYK37Zsd",
+                )
+            );
+        $context  = stream_context_create($opts);
+
+
+        $result = file_get_contents($url, false, $context);
 
         return $result;
 

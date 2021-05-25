@@ -2,24 +2,69 @@
 
 class Voertuigen {
 
-    public static $voertuigen = [];
+    public static $voertuigenCache = [];
 
     public static function addVoertuig($apiReponse, $cache = false) {
         if (gettype($apiReponse) == "array") return self::addVoertuigen($apiReponse, $cache);
-        
+        $kenteken = null;
+        $voertuigsoort = null;
+        $merk = null;
+        $handelsbenaming = null;
+        $inrichting = null;
+        $aantalCilinders = null;
+        $variant = null;
+        $eersteKleur = null;
+        $datumEersteToelating = null;        
+
+        if (property_exists($apiReponse, "kenteken")) {
+            $kenteken = $apiReponse->kenteken; 
+        }
+
+        if (property_exists($apiReponse, "voertuigsoort")) {
+            $voertuigsoort = $apiReponse->voertuigsoort; 
+        }
+
+        if (property_exists($apiReponse, "merk")) {
+            $merk = $apiReponse->merk; 
+        }
+
+        if (property_exists($apiReponse, "handelsbenaming")) {
+            $handelsbenaming = $apiReponse->handelsbenaming; 
+        }
+
+        if (property_exists($apiReponse, "inrichting")) {
+            $inrichting = $apiReponse->inrichting; 
+        }
+
+        if (property_exists($apiReponse, "aantal_cilinders")) {
+            $aantalCilinders = $apiReponse->aantal_cilinders;
+        }
+
+        if (property_exists($apiReponse, "variant")) {
+            $variant = $apiReponse->variant;
+        }
+
+        if (property_exists($apiReponse, "eerste_kleur")) {
+            $eersteKleur = $apiReponse->eerste_kleur;
+        }
+
+        if (property_exists($apiReponse, "datum_eerste_toelating")) {
+            $eersteToeLating = $apiReponse->datum_eerste_toelating;
+        }
+
         $newVoertuig = new Voertuig(
-            $apiReponse->kenteken, 
-            $apiReponse->voertuigsoort, 
-            $apiReponse->merk, 
-            $apiReponse->handelsbenaming, 
-            $apiReponse->inrichting, 
-            $apiReponse->aantal_cilinders, 
-            $apiReponse->variant, 
-            $apiReponse->eerste_kleur,
-            $apiReponse->datum_eerste_toelating);
+            $kenteken, 
+            $voertuigsoort, 
+            $merk, 
+            $handelsbenaming, 
+            $inrichting, 
+            $aantalCilinders, 
+            $variant, 
+            $eersteKleur,
+            $datumEersteToelating);
 
         if ($cache) {
-            array_push(self::$voertuigen, $newVoertuig);
+            array_push(self::$voertuigenCache, array($newVoertuig->getKenteken() => $newVoertuig));
         }
         return $newVoertuig;
     }
@@ -28,7 +73,7 @@ class Voertuigen {
         if (gettype($apiReponse) != "array") return self::addVoertuig($apiReponse, $cache);
         $dataArray = [];
         foreach ($apiReponse as $res) {
-            array_push($dataArray, self::addVoertuig($res));
+            array_push($dataArray, self::addVoertuig($res, $cache));
         }
 
         return $dataArray;

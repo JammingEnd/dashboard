@@ -1,7 +1,6 @@
 <?php
 	include_once("../server/curl_helper.php");
 	include_once("../server/types/voertuigen.php");
-
 	/**
 	 * Validation
 	 */
@@ -21,7 +20,8 @@
 
 	$results = CurlHelper::getFileContents($url);
 
-	$voertuigen = Voertuigen::addVoertuig(json_decode($results));
+	$voertuigen = Voertuigen::addVoertuig(json_decode($results), true);
+
 
 	if (count($voertuigen) <= 0) {
 		$host  = $_SERVER['HTTP_HOST'];
@@ -64,43 +64,43 @@
 				</div> -->
 
 				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
-					<a href="#merk" class="card-body" style="text-decoration:none;">
+					<a href="./Diagrammen.php?kenteken=<?php echo $voertuig->getKenteken() ?>&key=<?php echo $voertuig->getMerk() ?>" class="card-body" style="text-decoration:none;">
 						<h4 class="card-title">Merk: <?php echo $voertuig->getMerk() ?></h4>
 					</a>
 				</div>
 
 				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
-					<a href="#model" class="card-body" style="text-decoration:none;">
+					<a href="./Diagrammen.php?kenteken=<?php echo $voertuig->getKenteken() ?>&key=<?php echo $voertuig->getHandelsBenaming() ?>" class="card-body" style="text-decoration:none;">
 						<h4 class="card-title">Model: <?php echo $voertuig->getHandelsBenaming() ?> </h4>
 					</a>
 				</div>
 
 				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
-					<a href="#inrichting" class="card-body" style="text-decoration:none;">
+					<a href="./Diagrammen.php?kenteken=<?php echo $voertuig->getKenteken() ?>&key=<?php echo $voertuig->getInrichting() ?>" class="card-body" style="text-decoration:none;">
 						<h4 class="card-title">Inrichting: <?php echo $voertuig->getInrichting() ?> </h4>
 					</a>
 				</div>
 
 				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
-					<a href="#cilinders" class="card-body" style="text-decoration:none;">
+					<a href="./Diagrammen.php?kenteken=<?php echo $voertuig->getKenteken() ?>&key=<?php echo $voertuig->getAantalCilinders() ?>" class="card-body" style="text-decoration:none;">
 						<h4 class="card-title">Aantal cilinders: <?php echo $voertuig->getAantalCilinders() ?> </h4>
 					</a>
 				</div>
 
 				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
-					<a href="#variant" class="card-body" style="text-decoration:none;">
+					<a href="./Diagrammen.php?kenteken=<?php echo $voertuig->getKenteken() ?>&key=<?php echo $voertuig->getVariant() ?>" class="card-body" style="text-decoration:none;">
 						<h4 class="card-title">Variant: <?php echo $voertuig->getVariant() ?> </h4>
 					</a>
 				</div>
 
 				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
-					<a href="#eersteKleur" class="card-body" style="text-decoration:none;">
+					<a href="./Diagrammen.php?kenteken=<?php echo $voertuig->getKenteken() ?>&key=<?php echo $voertuig->getEersteKleur() ?>" class="card-body" style="text-decoration:none;">
 						<h4 class="card-title">Eerste kleur: <?php echo $voertuig->getEersteKleur() ?> </h4>
 					</a>
 				</div>
 
 				<div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
-					<a href="#eersteToeLating" class="card-body" style="text-decoration:none;">
+					<a href="./Diagrammen.php?kenteken=<?php echo $voertuig->getKenteken() ?>&key=<?php echo $voertuig->getEersteToeLating() ?>" class="card-body" style="text-decoration:none;">
 						<h4 class="card-title">Eerste toelating: <?php echo date("d-m-Y", $voertuig->getEersteToeLating()) ?> </h4>
 					</a>
 				</div>
