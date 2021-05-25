@@ -27,7 +27,7 @@ $labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else');
 <div class="flexbox">
 
 <div>
-  <canvas id="test"></canvas>
+<canvas id="test" width="468" height="468" style="display: block; box-sizing: border-box; height: 375px; width: 375px;"></canvas>
   </div>
 
 <script type="text/javascript">
@@ -78,7 +78,7 @@ window.addEventListener('load', function() {
   </script>
 <!-- ================ tweede diagram ============= -->
 <div>
-        <canvas id="Dia2"></canvas>
+<canvas id="Dia2" width="750" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 600px;"></canvas>
     </div>
 
 <script type="text/javascript">
