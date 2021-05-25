@@ -6,7 +6,12 @@ $aantallen = array(50, 1257, 3345, 1567, 897, 34, 12);
 $aantallen2 = array(30, 1567, 3045, 1787, 497, 56, 45);
 $aantallenDiagram2 = array(0, 10, 5, 2, 20, 30, 45);
 $labelDriagram2 = array( 'January','February','March','April','May','June',);
-$labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else');    
+$labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else'); 
+
+$labelNaamDia1 = "";
+$labelnaamDia2 = "";
+
+
 
 ?>
 <head>
@@ -27,7 +32,7 @@ $labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else');
 <div class="flexbox">
 
 <div>
-<canvas id="test" width="468" height="468" style="display: block; box-sizing: border-box; height: 375px; width: 375px;"></canvas>
+<canvas id="test" width="468" height="468" style="display: block; box-sizing: border-box; height: 500px; width: 500px;"></canvas>
   </div>
 
 <script type="text/javascript">
@@ -35,6 +40,7 @@ $labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else');
 var een_lijstJS = <?php echo json_encode($aantallen) ?>;
 var een_lijstJS2 = <?php echo json_encode($aantallen2) ?>;
 var labelDia1 = <?php echo json_encode($labelDriagram1) ?>;
+var labeNaam1 = <?php echo json_encode($labelnaamDia1)?>;
 
 //labels veranderen naar de opgevraagde data
 
@@ -42,7 +48,7 @@ var labelDia1 = <?php echo json_encode($labelDriagram1) ?>;
    labels: labelDia1,
 
 datasets: [{
-  label: 'Mercedes',
+  label: labelNaam1,
   data: een_lijstJS,
   fill: true,
   backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -78,13 +84,13 @@ window.addEventListener('load', function() {
   </script>
 <!-- ================ tweede diagram ============= -->
 <div>
-<canvas id="Dia2" width="750" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 600px;"></canvas>
+<canvas id="Dia2" width="750" height="375" style="display: block; box-sizing: border-box; height: 500px; width: 500px;"></canvas>
     </div>
 
 <script type="text/javascript">
 var dataDiagram2 = <?php echo json_encode($aantallenDiagram2) ?>;  
 var labelDiagram2 = <?php echo json_encode($labelDriagram2)?>;
-
+var labeNaam2 = <?php echo json_encode($labelnaamDia2)?>;
 //labels veranderen naar de opgevraagde data
 
 
@@ -94,7 +100,7 @@ var labelDiagram2 = <?php echo json_encode($labelDriagram2)?>;
     const data2 = {
         labels: labels2,
         datasets: [{
-            label: 'tweede diagram',
+            label: labelNaam2,
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: dataDiagram2,
