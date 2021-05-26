@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(36, 37, 38);
+}
+
 .flexbox {
   display: flex;
   flex-direction: row;
@@ -11,8 +15,8 @@
   background-color: aquamarine;
   width: 100%;
   height: fit-content;
-  border-top-right-radius: 30%;
-  border-bottom-right-radius: 30%;
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
 }
 #Dia2 {
   background-color: rgb(26, 182, 47);
