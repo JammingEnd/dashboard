@@ -34,9 +34,12 @@
 		exit;
 	}
 
+  $label = "";
+
   switch ($key) {
     case "aantal_cilinders":
       $keyObj = "aantalcilinders";
+      $lable = "Cilinders";
       break;
     case "handelsbenaming":
       $keyObj = "handelsbenaming";
