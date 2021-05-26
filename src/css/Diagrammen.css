@@ -17,8 +17,8 @@
 #Dia2 {
   background-color: rgb(26, 182, 47);
   border: 20px solid rgb(19, 206, 34);
-  max-width: 600px;
-  max-height: 500px;
+  max-width: 80%;
+  max-height: auto;
   margin-right: 0%;
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
