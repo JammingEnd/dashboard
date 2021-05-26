@@ -4,7 +4,7 @@
   include_once("../server/curl_helper.php");
 	include_once("../server/types/voertuigen.php");
 
-  if (count($_GET) <= 0 || !array_key_exists("kenteken", $_GET) || !array_key_exists("key", $_GET)) {
+  if (count($_GET) <= 0 || !array_key_exists("kenteken", $_GET) || !array_key_exists("key", $_GET) || !array_key_exists("value", $_GET) || !array_key_exists("merk", $_GET)) {
     $host  = $_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
     $extra = 'index.php';
@@ -12,15 +12,20 @@
     exit; // ???
   }
 
+  
+  $key = $_GET["key"]; // aantal_cilinders
+  $value = $_GET["value"]; // result.
+  $merk = $_GET["merk"];
+  $keyObj = null;
   $kenteken = $_GET["kenteken"];
 
 	$url = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
 
 	$results = CurlHelper::getFileContents($url);
 
-	$voertuigen = Voertuigen::addVoertuig(json_decode($results), true);
+	$allVoertuigen = Voertuigen::addVoertuig(json_decode($results), true);
 
-	if (count($voertuigen) <= 0) {
+	if (count($allVoertuigen) <= 0) {
     echo "2";
 		$host  = $_SERVER['HTTP_HOST'];
 		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -29,34 +34,53 @@
 		exit;
 	}
 
-  if (!$voertuigen) {
-    echo "3";
-    $host  = $_SERVER['HTTP_HOST'];
-    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $extra = 'index.php';
-    // header("Location: http://$host$uri/$extra");
-    exit;
+  switch ($key) {
+    case "aantal_cilinders":
+      $keyObj = "aantalcilinders";
+      break;
+    case "handelsbenaming":
+      $keyObj = "handelsbenaming";
+      break;
+    case "inrichting":
+      $keyObj = "inrichting";
+      break;
+    default:
+      break;
   }
 
-  // echo $kenteken;
+  $aantallen = array();
 
-  $mainVoertuig = array_search($kenteken, Voertuigen::$voertuigenCache, true);
+  $valueMap = array();
 
-
-
-  if (!$mainVoertuig && count($voertuigen) > 1) {
-    $url = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=' . $kenteken;
-
-	  $results = CurlHelper::getFileContents($url);
-    Voertuigen::addVoertuig(json_decode($results), true);
-    $voertuigen = Voertuigen::$voertuigenCache;
+  foreach ($allVoertuigen as $res) {
+    $result = $res->getPropByName($keyObj);
+    try {
+    if (array_key_exists($result, $valueMap)) {
+      $valueMap[$result] = $valueMap[$result] + 1;
+    } else {
+      $valueMap[$result] = 1;
+    }
+    } catch (Exception $e) {
+      echo "<br>";
+      var_dump($res);
+    }
   }
 
-  $lableName = $_GET["key"];
+  $aantallen = array();
+  $lables = array();
 
-  $aantallen = array(50, 1257, 3345, 1567, 897, 34, 12);
-  $labelDriagram1 = array('2cc','4cc','6cc','8cc','electric','hydrogen','else');    
+  foreach($valueMap as $mapKey => $mapValue) {
+    array_push($aantallen, $mapValue);
+    array_push($lables, ((string) $mapKey) == "" ? "?" : (string)$mapKey);
+  }
 
+  // var_dump($valueMap);
+
+  // echo "<br><br>";
+  // var_dump($aantallen);
+  // echo "<br><br>";
+  var_dump($lables);
+  // exit;
 
   $aantallen2 = array(30, 1567, 3045, 1787, 497, 56, 45); //hexagon
   $aantallenDiagram2 = array(0, 10, 5, 2, 20, 30, 45);
@@ -86,41 +110,41 @@
 
 <script type="text/javascript">
  
-var een_lijstJS = <?php echo json_encode($aantallen) ?>;
 var een_lijstJS2 = <?php echo json_encode($aantallen2) ?>;
-var labelDia1 = <?php echo json_encode($labelDriagram1) ?>;
 var labelName = <?php echo json_encode($lableName) ?>;
 //labels veranderen naar de opgevraagde data
 
-   const data = {
-   labels: labelDia1,
+var data = <?php echo json_encode($aantallen) ?>;
+var labels = <?php echo json_encode($lables) ?>;
 
-datasets: [{
-  label: labelName,
-  data: een_lijstJS,
-  fill: true,
-  backgroundColor: 'rgba(255, 99, 132, 0.2)',
-  borderColor: 'rgb(255, 99, 132)',
-  pointBackgroundColor: 'rgb(255, 99, 132)',
-  pointBorderColor: '#fff',
-  pointHoverBackgroundColor: '#fff',
-  pointHoverBorderColor: 'rgb(255, 99, 132)'
+const configData = {
+  labels,
+  datasets: [{
+    label: "todo",
+    data,
+    fill: true,
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgb(255, 99, 132)',
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(255, 99, 132)'
 
-}]
+  }]
 };
 
 
 
- const config = {
-type: 'radar',
-data: data,
-options: {
-  elements: {
-    line: {
-      borderWidth: 3
+const config = {
+  type: 'doughnut',
+  data: configData,
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
     }
-  }
-},
+  },
 };
 window.addEventListener('load', function() { 
       var myChart = new Chart(
@@ -148,7 +172,7 @@ var labeNaam2 = <?php echo json_encode($labelnaamDia2)?>;
     const data2 = {
         labels: labels2,
         datasets: [{
-            label: labelNaam2,
+            label: "???",
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: dataDiagram2,

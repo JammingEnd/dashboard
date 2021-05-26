@@ -107,6 +107,32 @@ class Voertuig {
         return $this;
     }
 
+    public function getPropByName($prop) {
+        if (gettype($prop) != "string") return null;
+        switch ($prop) {
+            case "kenteken":
+                return $this->getKenteken();
+            case "voertuigsoort":
+                return $this->getVoertuigSoort();
+            case "merk":
+                return $this->getVoertuigSoort();
+            case "handelsbenaming":
+                return $this->getHandelsBenaming();
+            case "inrichting":
+                return $this->getInrichting();
+            case "aantalcilinders":
+                return $this->getAantalCilinders();
+            case "variant": 
+                return $this->getVariant();
+            case "eerstekleur":
+                return $this->getEersteKleur();
+            case "eerstetoelating":
+                return $this->getEersteToeLating();
+            default:
+                return null;
+        }
+    }
+
     public function getKenteken() {
         return $this->_kenteken;
     }
