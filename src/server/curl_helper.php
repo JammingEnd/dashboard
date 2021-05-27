@@ -40,8 +40,12 @@ class CurlHelper {
     }
 
     public static function getFileContents($url, ) {
-        // $url = $url . "?%24limit=5000&%24%24app_token=ZHyla6oL2CtRsybgVkYK37Zsd";
-
+        if (strpos($url, "?")) {
+            $url = $url . "&%24limit=5000&%24%24app_token=ZHyla6oL2CtRsybgVkYK37Zsd";
+        } else {
+            $url = $url . "?%24limit=5000&%24%24app_token=ZHyla6oL2CtRsybgVkYK37Zsd";
+        }
+        
         $opts = array (
             'http' => array (
                 'method' => 'GET',

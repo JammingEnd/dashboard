@@ -48,31 +48,31 @@
       break;
     case "handelsbenaming":
       $keyObj = "handelsbenaming";
-      $lable = "handelsbenaming";
+      $lable = "Handelsbenaming";
 
       break;
     case "merk":
       $keyObj = "merk";
-      $lable = "merk";
+      $lable = "Merk";
 
       break;
     case "inrichting":
       $keyObj = "inrichting";
-      $lable = "intichting";
+      $lable = "Intichting";
 
       break; 
     case "variant":
       $keyObj = "variant";
-      $lable = "variant";
+      $lable = "Variant";
 
       break;    
     case "eerste_kleur":
       $keyObj = "eertke_kleur";
-      $lable = "eerste kleur";
+      $lable = "Eerste kleur";
       break;     
     case "datum_eerste_toelating":
-      $keyObj = "datum_eerste_toelating";
-      $lable = "datum_eerste_toelating";
+      $keyObj = "eerstetoelating";
+      $lable = "Eerste toelatings datum";
       break;     
 
 
